@@ -1,0 +1,14 @@
+phpfpm:
+  container_name: phpfpm
+  image: johnpbloch/phpfpm
+  volumes:
+    - "${PWD}/project:/var/www/project"
+nginx:
+  build: ./services/nginx
+  container_name: "${VIRTUAL_HOST}"
+  environment:
+    VIRTUAL_HOST: "${VIRTUAL_HOST}"
+  volumes:
+    - "${PWD}/project:/var/www/project"
+  links:
+    - phpfpm:phpfpm
