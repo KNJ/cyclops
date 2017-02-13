@@ -12,7 +12,7 @@ If not, nginx-proxy should be started first.
 docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-proxy
 ```
 
-## Docker Compose
+### Docker Compose
 
 Pass `VIRTUAL_HOST` when you run `docker-compose up`.
 This environment variable is needed for HTTP requests.
