@@ -14,9 +14,17 @@ docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-pr
 
 ### Docker Compose
 
-Pass `VIRTUAL_HOST` when you run `docker-compose up`.
-This environment variable is needed for HTTP requests.
+Pass the following environment variables hen you run `docker-compose up`.
 
-```sh
-env VIRTUAL_HOST=cyclops.wazly.com docker-compose up -d
+- `VIRTUAL_HOST`
+- `MYSQL_ROOT_PASSWORD`
+- `MYSQL_DEV_PASSWORD`
+- `MYSQL_PORT`
+
+```bash
+env VIRTUAL_HOST=cyclops.wazly.net \
+MYSQL_ROOT_PASSWORD=root_password \
+MYSQL_DEV_PASSWORD=dev_password \
+MYSQL_PORT=3306:3306 \
+docker-compose up -d
 ```
