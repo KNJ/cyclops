@@ -16,7 +16,7 @@ phpfpm:
   build: ./services/phpfpm
   privileged: true
   volumes:
-    - "${PWD}/project:/var/www/project"
+    - "${PWD}/${PROJECT_ROOT_PATH}:/var/www/project"
   links:
     - mysql:mysql
 nginx:
@@ -25,6 +25,6 @@ nginx:
   environment:
     VIRTUAL_HOST: "${VIRTUAL_HOST}"
   volumes:
-    - "${PWD}/project:/var/www/project"
+    - "${PWD}/${PUBLIC_ROOT_PATH}:/var/www/project/public"
   links:
     - phpfpm:phpfpm

@@ -14,17 +14,8 @@ docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-pr
 
 ### Docker Compose
 
-Pass the following environment variables hen you run `docker-compose up`.
+Run the containers and access http://localhost
 
-- `VIRTUAL_HOST`
-- `MYSQL_ROOT_PASSWORD`
-- `MYSQL_DEV_PASSWORD`
-- `MYSQL_PORT`
-
-```bash
-env VIRTUAL_HOST=cyclops.wazly.net \
-MYSQL_ROOT_PASSWORD=root_password \
-MYSQL_DEV_PASSWORD=dev_password \
-MYSQL_PORT=3306:3306 \
+```sh
 docker-compose up -d
 ```
