@@ -1,2 +1,4 @@
 /project
 /services/mysql/data
+.DS_Store
+.env

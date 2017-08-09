@@ -7,6 +7,7 @@
 Make your project directory and public directory:
 
 ```sh
+git clone git@github.com:KNJ/cyclops.git
 cd cyclops
 mkdir -p ./project/public
 ```
@@ -28,6 +29,12 @@ docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-pr
 ```
 
 ### Docker Compose
+
+Copy `.env.example` and save as `.env`:
+
+```sh
+cp .env.example .env
+```
 
 Run the containers and access http://localhost
 

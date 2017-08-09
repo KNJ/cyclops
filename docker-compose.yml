@@ -7,7 +7,7 @@ mysql:
     MYSQL_USER: dev
     MYSQL_PASSWORD: "${MYSQL_DEV_PASSWORD}"
   ports:
-    - "${MYSQL_PORT}"
+    - "${MYSQL_PORT}:3306"
   volumes:
     - "${PWD}/services/mysql/data:/var/lib/mysql"
   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
