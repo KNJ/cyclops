@@ -1,5 +1,5 @@
 mysql:
-  container_name: cyclops-mysql
+  container_name: "${VIRTUAL_HOST}-mysql"
   build: ./services/mysql
   environment:
     MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
@@ -12,7 +12,7 @@ mysql:
     - "${PWD}/services/mysql/data:/var/lib/mysql"
   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 phpfpm:
-  container_name: cyclops-phpfpm
+  container_name: "${VIRTUAL_HOST}-phpfpm"
   build: ./services/phpfpm
   privileged: true
   volumes:
@@ -20,7 +20,7 @@ phpfpm:
   links:
     - mysql:mysql
 nginx:
-  container_name: "${VIRTUAL_HOST}"
+  container_name: "${VIRTUAL_HOST}-nginx"
   build: ./services/nginx
   environment:
     VIRTUAL_HOST: "${VIRTUAL_HOST}"
