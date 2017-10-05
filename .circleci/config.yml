@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker
+
+    steps:
+      - checkout
+
+      - run:
+          command: |
+            docker pull jwilder/nginx-proxy;
+            docker run -d -p 80:80 -v /tmp/docker.sock:/tmp/docker.sock jwilder/nginx-proxy;
+
+      - run:
+          command: cp .env.example .env

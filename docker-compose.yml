@@ -1,30 +1,34 @@
-mysql:
-  container_name: "${VIRTUAL_HOST}-mysql"
-  build: ./services/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-    MYSQL_DATABASE: dev
-    MYSQL_USER: dev
-    MYSQL_PASSWORD: "${MYSQL_DEV_PASSWORD}"
-  ports:
-    - "${MYSQL_PORT}:3306"
-  volumes:
-    - "${PWD}/services/mysql/data:/var/lib/mysql"
-  command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-phpfpm:
-  container_name: "${VIRTUAL_HOST}-phpfpm"
-  build: ./services/phpfpm
-  privileged: true
-  volumes:
-    - "${PWD}/${PROJECT_ROOT_PATH}:/var/www/project"
-  links:
-    - mysql:mysql
-nginx:
-  container_name: "${VIRTUAL_HOST}-nginx"
-  build: ./services/nginx
-  environment:
-    VIRTUAL_HOST: "${VIRTUAL_HOST}"
-  volumes:
-    - "${PWD}/${PUBLIC_ROOT_PATH}:/var/www/project/public"
-  links:
-    - phpfpm:phpfpm
+version: "3"
+
+services:
+  mysql:
+    container_name: "${VIRTUAL_HOST}-mysql"
+    build: ./services/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: dev
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: "${MYSQL_DEV_PASSWORD}"
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - "${PWD}/services/mysql/data:/var/lib/mysql"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  nginx:
+    container_name: "${VIRTUAL_HOST}-nginx"
+    build: ./services/nginx
+    environment:
+      VIRTUAL_HOST: "${VIRTUAL_HOST}"
+    volumes:
+      - "${PWD}/${PUBLIC_ROOT_PATH}:/var/www/project/public"
+  phpfpm:
+    container_name: "${VIRTUAL_HOST}-phpfpm"
+    build: ./services/phpfpm
+    privileged: true
+    volumes:
+      - "${PWD}/${PROJECT_ROOT_PATH}:/var/www/project"
+
+networks:
+  default:
+    external:
+      name: "${DEFAULT_EXTERNAL_NETWORK}"
